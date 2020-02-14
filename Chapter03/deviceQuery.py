@@ -32,7 +32,8 @@ for i in range(drv.Device.count()):
     # See the following:
     # http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities
     
-    cuda_cores_per_mp = { 5.0 : 128, 5.1 : 128, 5.2 : 128, 6.0 : 64, 6.1 : 128, 6.2 : 128, 7.0 : 64, 7.1 : 64, 7.2 : 64, 7.3 : 64, 7.4 : 64, 7.5 : 64}[compute_capability]
+    cuda_cores_per_mp = { 3.0 : 192, 3.2 : 192, 3.5 : 192, 3.7 : 192, 5.0 : 128, 5.1 : 128, 5.2 : 128, 5.3 : 128, 6.0 : 64, 6.1 : 128,\
+         6.2 : 128, 7.0 : 64, 7.1 : 64, 7.2 : 64, 7.3 : 64, 7.4 : 64, 7.5 : 64}[compute_capability]
     
     print ('\t ({}) Multiprocessors, ({}) CUDA Cores / Multiprocessor: {} CUDA Cores'.format(num_mp, cuda_cores_per_mp, num_mp*cuda_cores_per_mp))
     
