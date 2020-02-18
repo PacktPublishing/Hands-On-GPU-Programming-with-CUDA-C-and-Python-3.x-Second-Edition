@@ -51,8 +51,8 @@ t=np.float32(0.005)
 
 in_x = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) + .5 ))
 in_y = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) + .5))
-in_v_x = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) - .5)) #gpuarray.zeros_like(in_x)
-in_v_y = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) - .5))#gpuarray.zeros_like(in_y)
+in_v_x = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) - .5))
+in_v_y = gpuarray.to_gpu(np.float32(np.random.random(NUM_BODIES) - .5))
 
 out_x = gpuarray.empty_like(in_x)
 out_y = gpuarray.empty_like(in_y)
@@ -82,10 +82,10 @@ def update_gpu(frameNum, img, in_x, in_y, in_v_x, in_v_y, out_x, out_y, out_v_x,
     
     if frameNum % 2 == 0:
         nbody_ker(in_x,in_y,in_v_x,in_v_y,out_x,out_y,out_v_x,out_v_y,m,t,NUM_BODIES)
+        img.set_data(xy_to_img(out_x.get(), out_y.get(), masses))
     else:
         nbody_ker(out_x,out_y,out_v_x,out_v_y,in_x,in_y,in_v_x,in_v_y,m,t,NUM_BODIES)
-    
-    img.set_data(xy_to_img(out_x.get(), out_y.get(), masses))
+        img.set_data(xy_to_img(in_x.get(), in_y.get(), masses))
 
     return img
     
